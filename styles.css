@@ -1,3 +1,10 @@
+@media (max-width: 480px) {
+    /* Example media query for mobile devices */
+    body {
+        font-size: 16px; /* Ensures text is not too small */
+    }
+}
+
 body {
     background-color: #fff0e5;
     margin: 0; /* Ensure body has no margin */
