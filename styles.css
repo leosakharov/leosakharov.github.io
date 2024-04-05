@@ -8,6 +8,10 @@ body {
     overflow: hidden; /* Prevent scrolling on the body */
 }
 
+h1 {
+    font-size: 4em;
+}
+
 #mainBody {
     border-width: 1px;
     border-style: solid;
@@ -20,7 +24,7 @@ body {
     background-color: white; /* Kept the second declaration as it usually overrides the first */
     color: black;
     font-family: 'Roboto', sans-serif;
-    padding: 100px; /* Adjust padding if needed */
+    padding: 40px; /* Adjust padding if needed */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -59,6 +63,7 @@ button:hover {
     transform: scale(1.05); /* Slight increase in size on hover */
     box-shadow: #627279 5px 5px 0px;
 }
+
 #feedback {
     margin: 20px;
     padding: 10px 10px 5px 10px; /* top right bottom left */
@@ -77,6 +82,7 @@ button:hover {
     align-items: center;
     margin-bottom: 20px;
     width: 60%;
+    position: relative; /* Establish this as the positioning context */
 }
 
 #progressBarContainer {
@@ -85,9 +91,27 @@ button:hover {
     background-color: #f5f5f5; /* Lighter background for the container */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
     border-radius: 5px;
-    margin-top: 20px;
-    overflow: hidden; /* Ensures children don't overflow the rounded corners */
-    
+    margin: 5px 20px; /* Add some space on the sides */
+}
+
+.date-container {
+    position: absolute;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #c9d7de91;
+    border-radius: 5px;
+    font-size: 12px;
+    color: black;
+}
+
+#startDate {
+    left: 0;
+    transform: translateX(-100%); /* Move it to the left of the progress bar */
+}
+
+#endDate {
+    right: 0;
+    transform: translateX(100%); /* Move it to the right of the progress bar */
 }
 
 #progressBar, #expectedProgress {
@@ -104,12 +128,23 @@ button:hover {
     opacity: 0.85; /* Semi-transparent to blend with the background */
 }
 
-#date {
-    padding: 5px 10px; /* Add some padding inside the box */
-    border: 1px solid #e0d8d8; /* A light border for the box */
-    background-color: #d3f2ff;
-    font-size: 14px; /* Make the text a bit smaller */
-    color: black; /* Text color */
-    border-radius: 5px; /* Optional: rounded corners for the box */
-    margin-top: 20px; /* Add some space above the box */
+.progress-pointer {
+    width: 10px; /* Width of the pointer */
+    height: 10px; /* Height of the pointer */
+    background-color: #000; /* Pointer color */
+    position: absolute;
+    bottom: -10px; /* Position it below the progress bar */
+    transform: translateX(-50%); /* Center it horizontally */
+}
+
+.date-indicator {
+    position: absolute;
+    bottom: -30px; /* Adjust this value based on your design */
+    transform: translateX(-50%);
+    background-color: #c9d7de91;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 6px;
+    white-space: nowrap;
 }
