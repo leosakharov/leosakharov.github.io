@@ -1,9 +1,26 @@
+<!DOCTYPE html>
 <html>
-
+<head>
+    <title>Programming Course Progress Tracker</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
 <body>
-  <h1>Leo Sakharov</h1>
-  <p>Welcome to my website!</p>
-  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
+        <div id="mainBody">
+            <h1>Leo's Progress Tracker</h1>
+            <label for="progressInput">Enter your current progress (%):</label>
+            <input type="number" id="progressInput" min="0" max="100">
+            <button onclick="evaluateProgress()">Check Progress</button>
+            <p id="feedback"></p>
+            <div class="progressInfo">
+                <div id="progressBarContainer">
+                    <div id="progressBar"></div>
+                    <div id="expectedProgress"></div>
+                </div>
+            </div>
+            <div id="calendar"></div>
+            <div id="date"></div>
+        </div>
+        <script src="script.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,115 @@
+body {
+    background-color: #fff0e5;
+    margin: 0; /* Ensure body has no margin */
+    display: flex; /* Make body a flex container */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrolling on the body */
+}
+
+#mainBody {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-navy); /* Ensure --color-navy is defined in your CSS or replace it with a color value */
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    height: auto; /* Changed from fixed height to auto to accommodate content */
+    border-radius: 20px; /* Unified border-radius value */
+    background-color: white; /* Kept the second declaration as it usually overrides the first */
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    padding: 100px; /* Adjust padding if needed */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 50%; /* Minimum width */
+    min-height: 200px; /* Minimum height */
+    width: auto; /* Width adjusts to content */
+    box-sizing: border-box; /* Include padding and border in the box's size */
+}
+
+
+input, button {
+    font-size: 16px; /* Uniform font size for better visual hierarchy */
+    padding: 10px; /* Adequate padding for better interaction */
+    margin-top: 15px; /* Consistent spacing */
+    width: 250px; /* Ensuring input and button have the same width */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 5px; /* Rounded corners for a modern look */
+}
+
+button {
+    display: flex;
+    height: 100%;
+    color: black;
+    background-color: #d3f2ff;
+    box-shadow: currentcolor 0px 0px 0px;
+    position: relative;
+    border-color: var(--color-secondary-hover);
+    padding: 1rem;
+    border-radius: 3px;
+    transition: box-shadow 200ms ease 0s, transform 200ms ease 0s;
+}
+
+button:hover {
+    background-color: #d3f2ff; /* Darker shade on hover */
+    transform: scale(1.05); /* Slight increase in size on hover */
+    box-shadow: #627279 5px 5px 0px;
+}
+#feedback {
+    margin: 20px;
+    padding: 10px 10px 5px 10px; /* top right bottom left */
+    min-height: 20px; /* Adjust based on your new font size */
+    font-size: 10px; /* Set to a smaller font size */
+    color: #000000;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    visibility: hidden; /* Keeps the space reserved but hides the content */
+}
+
+.progressInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 60%;
+}
+
+#progressBarContainer {
+    position: relative;
+    width: 100%; /* Utilize more space for the progress bar */
+    background-color: #f5f5f5; /* Lighter background for the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    border-radius: 5px;
+    margin-top: 20px;
+    overflow: hidden; /* Ensures children don't overflow the rounded corners */
+    
+}
+
+#progressBar, #expectedProgress {
+    height: 20px;
+    transition: width 0.5s;
+}
+
+#progressBar {
+    background-color: #eafdc6; /* Refreshing green for progress */
+}
+
+#expectedProgress {
+    background: linear-gradient(to right, #ff9800, #ff5722); /* Gradient for expected progress */
+    opacity: 0.85; /* Semi-transparent to blend with the background */
+}
+
+#date {
+    padding: 5px 10px; /* Add some padding inside the box */
+    border: 1px solid #e0d8d8; /* A light border for the box */
+    background-color: #d3f2ff;
+    font-size: 14px; /* Make the text a bit smaller */
+    color: black; /* Text color */
+    border-radius: 5px; /* Optional: rounded corners for the box */
+    margin-top: 20px; /* Add some space above the box */
+}
