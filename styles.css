@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'MPLUSRounded1c';
-    src: url('../fonts/MPLUSRounded1c-Regular.ttf') format('truetype');
+    src: url('./MPLUSRounded1c-Regular.ttf') format('truetype');
 }
 
 body {
