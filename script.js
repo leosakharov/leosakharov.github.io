@@ -1,126 +1,342 @@
-let globalExpectedProgress = 0;
 
-// This function is called when the page loads
-function initializeProgress() {
-    // Initialize the expected progress bar
-    updateExpectedProgress();
+const recipes = [
+  { 
+    name: "Aperol/Campari Spritz", 
+    recipe: "5cl Aperol or Campari. 6cl Cava, Soda water",
+    garnish: "1 Slice of orange",
+    procedure: "Fill the glass with ice and a single slice of orange. Add Aperol then Proseco Cava. Top off with soda. Stir with short straw and serve."
+  },
+  { 
+    name: "Amaretto Sour", 
+    recipe: "4cl Amaretto. 2cl Lemon juice. 1,5cl Frothee. 1cl Simple syrup. 2 Dashes of Angostura",
+    garnish: "Dry fruit & Amarena Cherry",
+    procedure: "Add all the ingredients into a shaker. Shake and pour it into a sour glass. Add the garnish and serve"
+  },
+  { 
+    name: "Black Russian", 
+    recipe: "4cl Vodka, 2cl Kahlua",
+    garnish: "",
+    procedure: "Add full ice to a samll glass. Pour Kahlua then Vodka. Stir and serve"
+  },
+  { 
+    name: "Bloody Mary", 
+    recipe: "9 Sprinkles of pepper. 4 Dashes of Worchestershire Sauce. 2 Dashes of Tabasco. 3 Sprinkles of celery salt. 6cl Tomato juice. 5cl Vodka. 2cl Lemon juice",
+    garnish: "1 Slice of lemon. 1 celery-stick.",
+    procedure: "Add all ingredients to a shaker. Add ice then mix them slowly. Dip the rime of the glass in Celery salt. Fill with ice. Strain the mix into the glass. Add garnish and serve"
+  },
+  { 
+    name: "Boulevardier", 
+    recipe: "3cl Bourbon. 3cl Martini Rosso. 3cl Campari. 1cl Orange juice",
+    garnish: "1 Slice of Orange",
+    procedure: "Stir all ingredients in a mixing glass full of ice. Pour the ingredients into a cocktail glass with a big ice-cube. Garnish with an orange slice and serve"
+  },
+  { 
+    name: "Caipirinha", 
+    recipe: "2 Spoons of brown sugar. Half a lime (in cubes). 1,5cl Lime syrup. 5cl Cachaca",
+    garnish: "1 Slice of lime",
+    procedure: "Muddle the lime with the sugar and lime syrup in the glass. Fill half the glass with crushed ice. Pour Cachaça and mix well. Fill the glass with crushed ice and garnish. Serve"
+  },
+  { 
+    name: "Charlie Chaplin", 
+    recipe: "3cl Lime juice. 3cl Apricot Brandy. 3cl Sloe Gin",
+    garnish: "Rosemary (herbs) or candy",
+    procedure: "Shake the ingredients in the shaker. Pour into a sour glass. Add garnish and serve"
+  },
+  { 
+    name: "Cherry Rum Sour", 
+    recipe: "4cl Havana Especial. 2cl Lemon juice. 1,5cl Egg White. 1cl Simple syrup. 2 fresh cherries",
+    garnish: "1 Amarena Cherry",
+    procedure: "Muddle the cherries in the Shaker. Add the ingredients and shake. Pour the foamy mix into a glass full of ice. Garnish with cherry and serve"
+  },
+  { 
+    name: "Cosmopolitan", 
+    recipe: "2cl Lime juice. 6cl Cranberry juice. 4cl Vodka. 2cl Cointreau. 1cl Simple syrup",
+    garnish: "Thin cylinder of lime or dry lime",
+    procedure: "Add ingredients into the shaker. Shake and pour the mix into a Martini glass. Garnish with a thin cylinder of dry lime and serve."
+  },
+  { 
+    name: "Cuba Libre", 
+    recipe: "&frac14; Lime juice. 4cl Havana 3Y. Pepsi",
+    garnish: "2 Lime wedges",
+    procedure: "Squeeze quarter of lime in the glass. Fill the glass with ice. Add rum and coke. Garnish with a lime wedge and serve."
+  },
+  { 
+    name: "Dark&rsquo;n&rsquo;Stormy", 
+    recipe: "&frac14; lime juice. Ginger Beer. 4 cl Dark Rum (Gosling). 2 Dashes of Angostura",
+    garnish: "",
+    procedure: "Squeeze quarter lime in the glass. Fill with ice. Pour ginger beer till “two fingers” from the top. Add Rum and 2 dashes of angostura. Serve"
+  },
+  { 
+    name: "Dry Martini", 
+    recipe: "1cl Extra Dry Martini. 5cl of Gin",
+    garnish: "3 Olives on a long toothpick",
+    procedure: "Pour ingredients into a mixing glass and stir with ice cubes. Pour the mix into a Martini glass. Garnish with olives and serve"
+  },
+  { 
+    name: "Espresso Martini", 
+    recipe: "1 Shot of Espresso (3cl). 4cl Vodka. 2cl Kahlua. 0,5cl Cointreau. 1cl Simple Syrup",
+    garnish: "3 Coffee beans",
+    procedure: "Add ingredients in a shaker and shake well. Strain the foamy mix into the glass. Garnish with 3 Coffee Beans and serve"
+  },
+  { 
+    name: "Gin Basil", 
+    recipe: "Basil. 1 Spoon of sugar. &frac14; Lime. 4cl Gin. 2cl Lemon juice. 1cl Lime syrup. 1cl Simple syrup",
+    garnish: "1 Leaf of basil",
+    procedure: "Muddle basil, sugar and lime juice in a shaker. Add ingredients and shake well. Double strain the mix. Add a leaf of Basil and serve"
+  },
+  { 
+    name: "Gin Sour", 
+    recipe: "4cl Gin. 2cl Lemon juice. 1,5cl Egg white. 1cl Simple syrup",
+    garnish: "Dry lemon",
+    procedure: "Add all the ingredients in a shaker and shake. Pour it into a sour glass. Garnish with thin lemon slice and serve"
+  },
+  { 
+    name: "Godfather", 
+    recipe: "4cl Bourbon. 2cl Amaretto. 1cl Orange juice. 2 Dashes of Angostura",
+    garnish: "1 Amarena Cherry",
+    procedure: "Add ingredients into a mixing glass and stir well. Add a big ice cube into cocktail glass. Pour the ingredients into the glass. Garnish with Amarena Cherry and serve"
+  },
+  { 
+    name: "Manhattan", 
+    recipe: "4cl Bourbon. 2cl Martini Rosso. 2 Drops of Orange Bitters",
+    garnish: "Amarena Cherry",
+    procedure: "Add the ingredients into a mixing glass with ice and stir well. Squeeze and orange peel into the Martini glass rim. Pour the mix into the glass. Garnish with Amarena Cherry on long toothpick"
+  },
+  { 
+    name: "Margarita", 
+    recipe: "5cl Tequila. 2cl Cointreau. 2cl Lime juice. 1cl Lime syrup",
+    garnish: "1 Dry lime",
+    procedure: "Add ingredients into a shaker and shake well. Dip the rim of a sour glass in lime then salt. Pour the mix into the glass and garnish with dry Lime"
+  },
+  { 
+    name: "Mezcal Margarita", 
+    recipe: "5cl Mezcal. 2cl Cointreau. 2cl Lime juice. 1cl Lime syrup",
+    garnish: "1 Slice of lime or dry lime",
+    procedure: "Add ingredients into a shaker and shake well. Dip the rim of a sour glass in lime then Tajin-mix. Pour the mix into the glass and garnish with Lime cylinder"
+  },
+  { 
+    name: "Mezcal Carre", 
+    recipe: "1 Smashed Amarena Cherry or 2 fresh cherries. 4cl Mezcal. 2cl Lemon juice. 2cl Triple Sec",
+    garnish: "1 Amarena Cherry or 1 fresh cherry",
+    procedure: "Add all ingredients into a shaker and shake (Muddle cherries first if using cherries). Double strain the mix into a cocktail glass. Garnish with Maraschino or fresh cherry and serve"
+  },
+  { 
+    name: "Mezcal Mule", 
+    recipe: "2 pieces of ginger. Half a spoon of brown sugar. &frac14; lime juice. 4cl Mezcal. 2cl Lemon juice. 1cl Lime syrup. 1cl Simple syrup. Ginger beer",
+    garnish: "Slice of Orange",
+    procedure: "Muddle ginger and sugar in the shaker. Add ingredients into the shaker. Mix well. Pour the mix into a cocktail glass full of ice. Add Ginger Beer. Garnish with orange slice and Serve"
+  },
+  { 
+    name: "Mojito", 
+    recipe: "6 Lime cubes. 2 Spoons of brown sugar. 8 Leaves of mint. 4cl Havana 3Y. 1cl Lime syrup. Soda",
+    garnish: "Mint top. 1 Lime cube. 2 Sprays of Angostura",
+    procedure: "Hard muddle 4 wedges of lime with 2 spoons of sugar in Mojito glass. Add 8 leaves of mint and muddle lightly. Fill half the glass with ice. Pour Rum and lime syrup and stir using napkins to cover glass top. Add dash of soda. Garnish with lime, mint-top and Angostura. Serve"
+  },
+  { 
+    name: "Moscow Mule", 
+    recipe: "2 Pieces of ginger. Half a spoon of brown sugar. &frac14; Lime juice. 4cl Vodka. 2cl Lemon juice. 1cl Lime syrup. 1cl Simple syrup. 5 Dashes of Angostura. Ginger beer",
+    garnish: "Slice of cucumber. 2 Dashes of Angostura",
+    procedure: "Muddle ginger and sugar in the shaker. Add ingredients into the shaker. Mix well. Pour the mix into a cocktail glass half of ice. Add GingerBeer. Garnish with cucumber slice and Serve"
+  },
+  { 
+    name: "Mezcal Paloma", 
+    recipe: "5cl Mezcal. 5cl Grapefruit. 3cl Lemon juice. 2cl Simple syrup",
+    garnish: "1 Slice of grapefruit",
+    procedure: "Add all ingredients into a shaker and shake well. Dip a cocktail glass into grapefruit then Tajin- mix. Pour the mix into the glass with a big Ice-cube and serve"
+  },
+  { 
+    name: "Negroni", 
+    recipe: "3cl Gin. 3cl Martini Rosso. 3cl Campari. 2 Dashes of Angostura orange",
+    garnish: "1 Slice of dry orange or peel",
+    procedure: "Stir all ingredients in a mixing glass full of ice. Pour the ingredients into a cocktail glass with a big ice-cube. Garnish with orange slice and serve"
+  },
+  { 
+    name: "Old Fashioned", 
+    recipe: "2 cubes of white sugar. 5 Dashes Angostura. 5cl Rye Whiskey",
+    garnish: "Peel of Orange and a Amarena Cherry. NB: Less sugar if made with Bourbon",
+    procedure: "Muddle sugar with dash of sparkling water and angostura in an old fashioned glass. Add a big ice cube and pour the whiskey. Stir until sugar dissolves totally. Peel orange skin and squeeze into the glass rim. Garnish with the orange peel and a Maraschino cherry. Serve"
+  },
+  { 
+    name: "Pisco Sour", 
+    recipe: "2cl Lime juice. 4cl Pisco. 1,5cl Egg white. 1cl Simple syrup. 0,5 Cointreau",
+    garnish: "3 drops of Angostura. Dry lime",
+    procedure: "Add ingredients into the shaker and shake well. Pour the foamy mix into a sour glass. Spray the foamy top with Angostura. Serve"
+  },
+  { 
+    name: "Rum Sour", 
+    recipe: "4cl White Rum. 2cl Lemon juice. 1,5cl Egg white. 1cl Simple syrup. 2 Dashes of Angostura",
+    garnish: "Dry fruit & 1 Amarena Cherry",
+    procedure: "Add all the ingredients into a shaker and shake. Pour the foamy mix into a sour glass. Garnish with Dry fruit &1 Amarena Cherry and serve"
+  },
+  { 
+    name: "Sazerak", 
+    recipe: "2,5cl VS Cognac. 2,5cl Rye Whiskey. 1,5cl Simple syrup. 2 Dashes peychaud bitter. Absinth",
+    garnish: "Lemon peel",
+    procedure: "Stir all ingredients with ice in a stirring glass. Spray the glass with absinth. Add big ice and pour the ingredients into the glass. Squeeze lemon peel on the glass rim and garnish with the squeezed lemon peel"
+  },
+  { 
+    name: "Salty Dog", 
+    recipe: "3cl Gin. 3cl Campari. 4cl Grapefruit",
+    garnish: "1 Slice of grapefruit",
+    procedure: "Add all the ingredients into a shaker and shake. Dip the cocktail glass into grapefruit then salt. Pour the mix into the glass. Garnish with grapefruit slice and serve"
+  },
+  { 
+    name: "Spagett", 
+    recipe: "Bottle of Light beer. 2cl Campari or Aperol. 1cl Lemon juice",
+    garnish: "",
+    procedure: "Pour the beer into a long beer glass, add Campari or Aperol and lemon juice then serve"
+  },
+  { 
+    name: "Vodka Sour", 
+    recipe: "4cl Vodka. 2cl Lemon juice. 1,5cl Egg white. 1cl Simple syrup",
+    garnish: "Dry lemon",
+    procedure: "Add all the ingredients into a shaker and shake. Pour the foamy mix into a sour glass. Garnish with lemon slice and serve"
+  },
+  { 
+    name: "Whiskey Sour", 
+    recipe: "4cl Bourbon. 2cl Lemon juice. 1,5cl Egg white. 1cl Simple syrup. 2 Dashes of Angostura",
+    garnish: "Dry fruit & 1 Amarena Cherry",
+    procedure: "Add all the ingredients into a shaker and shake. Pour the foamy mix into a sour glass. Garnish with Dry fruit &1 Amarena Cherry and serve."
+  },
+  { 
+    name: "White Russian", 
+    recipe: "3cl Kahlua. 4cl Vodka. 4cl Milk",
+    garnish: "3 Coffee Beans",
+    procedure: "Pour Kahlua into a glass full of ice. Add Vodka and Milk into a shaker and shake well. Pour the mix slowly into the glass of Kahlua and ice so it creates two layers. Garnish with 3 coffee beans and serve."
+  },
+  { 
+    name: "Christmas time Glogg", 
+    recipe: "8 Cloves. 5 Dashes of cinnamon. 5 Scratches of Nutmeg. 2cl Sugar Syrup. 1,5cl Dark Rum. 1cl Orange Juice. 1 glass of Red Wine. 2 Spoonfuls of Raisins and Almondslivers",
+    garnish: "",
+    procedure: "Add Cloves, Cinnamon and Nutmeg to a coffee canister. Then add the rest of the ingredient. Steam the mix using the coffee machine steamer. Pour it into wine glass using a strainer. Add Raisins and Almond slivers. Serve with a spoon"
+  },
+  { 
+    name: "Irish Coffee", 
+    recipe: "1 Americano. 4cl Whiskey (Bushmills). 1cl Irish cream. Whip Cream. Brown sugar. Brown sugar Stick",
+    garnish: "",
+    procedure: "Prepare an americano with less water in Irish coffee glass, Add irish cream and whiskey. Add whip cream and sprinkle Brown sugar. Place a sugarstick on the saucer and serve"
+  },
+];
 
-    // Initialize the actual progress bar to be empty
-    const progressBarElement = document.getElementById('progressBar');
-    progressBarElement.style.width = '0%'; // Start with an empty progress bar
+let currentRecipeIndex = -1;
 
-    // Listen for Enter key press in the progress input field
-    const progressInput = document.getElementById('progressInput');
-    progressInput.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            evaluateProgress();
-        }
-    });
+function displayRecipe(index) {
+  const recipe = recipes[index];
+  const ingredients = recipe.recipe.split('.').map(ingredient => `<li>${ingredient}</li>`).join('');
+  const garnish = recipe.garnish.split('.').map(garnish => `<li>${garnish}</li>`).join('');
+  const procedureSteps = recipe.procedure.split('.').map(step => step.trim()).filter(step => step).map(step => `<li>${step}.</li>`).join('');
 
-    progressInput.focus();
-
-    // Set the date in the date div
-    setDate();
+  const cardContainer = document.getElementById('card-container');
+  cardContainer.innerHTML = `
+      <div class="card-inner" onclick="flipCard(this)">
+          <div class="card-front">
+              <h2>${recipe.name}</h2>
+          </div>
+          <div class="card-back">
+              <h2>${recipe.name}</h2>
+              <strong>Ingredients:</strong>
+              <ul>${ingredients}</ul> 
+              <strong>Garnish:</strong>
+              <ul>${garnish}</ul>
+              <strong>Procedure:</strong>
+              <ol>${procedureSteps}</ol>
+          </div>
+      </div>
+  `;
 }
 
-function setDate() {
-    const dateElement = document.getElementById('date');
-    const today = new Date();
-    dateElement.textContent = formatDate(today);
+function flipCard(cardInner) {
+  const isFlipped = cardInner.style.transform === 'rotateY(180deg)';
+  cardInner.style.transform = isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)';
 }
 
-
-function updateExpectedProgress() {
-    const startDate = new Date(new Date().setDate(new Date().getDate() - 21));
-    const endDate = new Date('2024-06-29');
-    const currentDate = new Date();
-    const totalDays = (endDate - startDate) / (1000 * 3600 * 24);
-    const daysElapsed = (currentDate - startDate) / (1000 * 3600 * 24);
-    globalExpectedProgress = Math.floor((daysElapsed / totalDays) * 100);
-
-    let expectedProgressElement = document.getElementById('expectedProgress');
-    let progressPointer = document.getElementById('progressPointer');
-    let dateElement = document.getElementById('date');
-
-    expectedProgressElement.style.width = `${globalExpectedProgress}%`;
-
-    // Set the pointer and date's position based on the width of the expected progress
-    const progressBarContainer = document.getElementById('progressBarContainer');
-    const pointerPosition = (progressBarContainer.offsetWidth * globalExpectedProgress) / 100;
-    progressPointer.style.left = `${pointerPosition}px`;
-    dateElement.style.left = `${pointerPosition}px`;
-
-    // Update the date text
-    dateElement.textContent = formatDate(endDate);
+function getNextRandomRecipeIndex() {
+  let nextIndex;
+  do {
+      nextIndex = Math.floor(Math.random() * recipes.length);
+  } while (nextIndex === currentRecipeIndex);
+  return nextIndex;
 }
 
+let onFlipCardsPage = false;
+
+document.getElementById('continue-button').addEventListener('click', function() {
+  let introPage = document.getElementById('intro-page');
+  let cardFlip = document.getElementById('card-flip');
+
+  if (introPage.style.display === 'none') {
+      introPage.style.display = 'block';
+      cardFlip.style.display = 'none';
+      onFlipCardsPage = false; // Set to false when returning to intro page
+  } else {
+      introPage.style.display = 'none';
+      cardFlip.style.display = 'block';
+      onFlipCardsPage = true; // Set to true when moving to card flip page
+  }
+});
 
 
-function createCalendar(startDate, endDate) {
-    const calendarContainer = document.getElementById('calendar');
+document.getElementById('go-back').addEventListener('click', function() {
+  document.getElementById('intro-page').style.display = 'flex';
+  document.getElementById('card-flip').style.display = 'none';
+  onFlipCardsPage = false; // Update onFlipCardsPage when using the go back arrow
+});
 
-    // Clear existing calendar
-    calendarContainer.innerHTML = '';
+document.addEventListener('keydown', function(event) {
+  if (event.code === 'Enter') {
+      if (!onFlipCardsPage) {
+          document.getElementById('intro-page').style.display = 'none';
+          document.getElementById('card-flip').style.display = 'block';
+          currentRecipeIndex = getNextRandomRecipeIndex();
+          displayRecipe(currentRecipeIndex);
+          onFlipCardsPage = true;
+      } else {
+          currentRecipeIndex = getNextRandomRecipeIndex();
+          displayRecipe(currentRecipeIndex);
+      }
+  } else if (event.code === 'Space' && onFlipCardsPage) {
+      const cardInner = document.querySelector('.card-inner');
+      flipCard(cardInner);
+  } else if (event.code === 'ArrowLeft' && onFlipCardsPage) {
+      // Simulate a click on the "Go Back" button when the left arrow key is pressed
+      document.getElementById('go-back').click();
+  } else if (event.code === 'ArrowRight' && !onFlipCardsPage) {
+      document.getElementById('continue-button').click();
+  }
+});
 
-    // Calculate the total number of days between start and end date
-    const totalDays = Math.ceil((endDate - startDate) / (1000 * 3600 * 24));
 
-    // Create a div for each day in the calendar
-    for (let i = 0; i < totalDays; i++) {
-        const dayDiv = document.createElement('div');
-        dayDiv.classList.add('day');
-        calendarContainer.appendChild(dayDiv);
+document.addEventListener('touchstart', handleTouchStart, false);        
+document.addEventListener('touchmove', handleTouchMove, false);
+
+let xDown = null;                                                        
+
+function handleTouchStart(evt) {
+    const firstTouch = evt.touches[0];                                      
+    xDown = firstTouch.clientX;                                      
+}                                            
+
+function handleTouchMove(evt) {
+    if (!xDown) {
+        return;
     }
-}
 
-function evaluateProgress() {
-    const currentProgress = parseFloat(document.getElementById('progressInput').value);
-    const progressBarElement = document.getElementById('progressBar');
-    const feedbackElement = document.getElementById('feedback');
+    let xUp = evt.touches[0].clientX;                                    
+    let xDiff = xDown - xUp;
 
-    // Check if the current progress is a valid number within the range
-    if (isNaN(currentProgress) || currentProgress < 0 || currentProgress > 100) {
-        feedback = 'Not a valid value. Please enter a number between 0 and 100.';
-        progressBarElement.style.width = '0%'; // Reset progress bar
-        feedbackElement.style.backgroundColor = 'rgba(255, 0, 0, 0.5)'; // Semi-transparent red for error
-    } else {
-        progressBarElement.style.width = `${currentProgress}%`;
+    if ( xDiff > 0 ) {
+        // Left swipe 
+        currentRecipeIndex = getNextRandomRecipeIndex();
+        displayRecipe(currentRecipeIndex);
+    }                       
 
-        if (currentProgress > globalExpectedProgress) {
-            feedback = 'Very good Mr. Sakharov. You are ahead of your plan. Take a chill, eat some food, go party with Tanzmaus Henkelmann';
-            feedbackElement.style.backgroundColor = 'rgba(76, 175, 80, 0.5)'; // Semi-transparent green
-            progressBarElement.style.backgroundColor = '#4CAF50';
-        } else if (currentProgress < globalExpectedProgress) {
-            feedback = 'Hey, no rush! Remember, slow and steady wins the race! You are doing fine Mr Sakharov. Savlanut as we say';
-            feedbackElement.style.backgroundColor = 'rgba(244, 67, 54, 0.5)'; // Semi-transparent red
-            progressBarElement.style.backgroundColor = '#f44336';
-        } else if (currentProgress === globalExpectedProgress) {
-            feedback = 'Spot on! Perfect.. Planned down to every small detail. Simply beautiful';
-            feedbackElement.style.backgroundColor = 'rgba(255, 215, 0, 0.5)'; // Semi-transparent gold
-            progressBarElement.style.backgroundColor = '#FFD700';
-        } else {
-            feedback = 'Hmm, that\'s curious... Did we just enter a parallel universe?';
-            feedbackElement.style.backgroundColor = 'rgba(33, 150, 243, 0.5)'; // Semi-transparent blue
-            progressBarElement.style.backgroundColor = '#2196F3';
-        }
-    }
-
-    feedbackElement.textContent = feedback;
-    feedbackElement.style.visibility = 'visible'; // Always show feedback
-}
-
-// Initialize the progress bars when the page loads
-window.onload = initializeProgress;
-
-// Function to format date as "YYYY-MM-DD"
-function formatDate(date) {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-    const day = date.getDate();
-    const monthIndex = date.getMonth();
-    const year = date.getFullYear();
-
-    return `${monthNames[monthIndex]} ${day}, ${year}`;
+    // Reset values
+    xDown = null;                                             
 }
 
 
+// Initialize with the first recipe
+window.onload = () => {
+  currentRecipeIndex = getNextRandomRecipeIndex();
+  displayRecipe(currentRecipeIndex);
+};
