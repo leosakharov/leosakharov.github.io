@@ -9,13 +9,20 @@
             <source src="./intro-page-red.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <h1>Let's practice the cocktails at Den Sorte Firkant</h1>
+        <h1>Let's practice the cocktails at <br> Den Sorte Firkant</h1>
         <button id="continue-button">Start &rarr;</button>
     </div>
     <div id="card-flip" style="display: none;">
-        <button id="go-back">&larr; Back</button>
+            <div class="menu-container">
+                <button id="menu-button">All recipes</button>  <!-- Hamburger Icon -->
+                <div id="recipe-menu" class="recipe-menu" style="display: none;"> <!-- Menu Container -->
+                    <!-- Recipe buttons will be appended here -->
+                </div>
+            </div>
         <div id="card-container" class="card-container"></div>
-    </div>  
+        <button id="go-back">&larr; Back</button>
+    </div>
+    
     <script src="./script.js"></script>
 </body>
 </html>

@@ -220,6 +220,43 @@ const recipes = [
 
 let currentRecipeIndex = -1;
 
+document.getElementById('menu-button').addEventListener('click', function() {
+  var menu = document.getElementById('recipe-menu');
+  if (menu.style.display === 'none' || menu.style.display === '') {
+      menu.style.display = 'block';
+  } else {
+      menu.style.display = 'none';
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Space' || event.code === 'Space') {
+      // Flip the current card
+      const cardInner = document.querySelector('.card-inner');
+      if (cardInner) {
+          const isFlipped = cardInner.style.transform === 'rotateY(180deg)';
+          cardInner.style.transform = isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)';
+      }
+  } else if (event.key === 'Enter' || event.code === 'Enter') {
+      // Display a new random recipe
+      currentRecipeIndex = getNextRandomRecipeIndex();
+      displayRecipe(currentRecipeIndex);
+  }
+});
+
+function createRecipeMenu() {
+    const menu = document.getElementById('recipe-menu');
+    recipes.forEach((recipe, index) => {
+        const button = document.createElement('button');
+        button.textContent = recipe.name;
+        button.onclick = () => {
+            displayRecipe(index);
+            menu.style.display = 'none'; // Close menu after selection
+        };
+        menu.appendChild(button);
+    });
+}
+
 function displayRecipe(index) {
   const recipe = recipes[index];
   const ingredients = recipe.recipe.split('.').map(ingredient => `<li>${ingredient}</li>`).join('');
@@ -228,14 +265,14 @@ function displayRecipe(index) {
 
   const cardContainer = document.getElementById('card-container');
   cardContainer.innerHTML = `
-      <div class="card-inner" onclick="flipCard(this)">
+      <div class="card-inner" onclick="flipCard()">
           <div class="card-front">
               <h2>${recipe.name}</h2>
           </div>
           <div class="card-back">
               <h2>${recipe.name}</h2>
               <strong>Ingredients:</strong>
-              <ul>${ingredients}</ul> 
+              <ul>${ingredients}</ul>
               <strong>Garnish:</strong>
               <ul>${garnish}</ul>
               <strong>Procedure:</strong>
@@ -245,9 +282,12 @@ function displayRecipe(index) {
   `;
 }
 
-function flipCard(cardInner) {
-  const isFlipped = cardInner.style.transform === 'rotateY(180deg)';
-  cardInner.style.transform = isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)';
+function flipCard() {
+  const cardInner = document.querySelector('.card-inner');
+  if (cardInner) {
+      const isFlipped = cardInner.style.transform === 'rotateY(180deg)';
+      cardInner.style.transform = isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)';
+  }
 }
 
 function getNextRandomRecipeIndex() {
@@ -255,88 +295,77 @@ function getNextRandomRecipeIndex() {
   do {
       nextIndex = Math.floor(Math.random() * recipes.length);
   } while (nextIndex === currentRecipeIndex);
+  currentRecipeIndex = nextIndex;  // Update the global index
   return nextIndex;
 }
 
-let onFlipCardsPage = false;
-
 document.getElementById('continue-button').addEventListener('click', function() {
+    let introPage = document.getElementById('intro-page');
+    let cardFlip = document.getElementById('card-flip');
+
+    if (introPage.style.display === 'none') {
+        introPage.style.display = 'block';
+        cardFlip.style.display = 'none';
+    } else {
+        introPage.style.display = 'none';
+        cardFlip.style.display = 'block';
+    }
+});
+
+document.getElementById('go-back').addEventListener('click', function() {
+    document.getElementById('intro-page').style.display = 'flex';
+    document.getElementById('card-flip').style.display = 'none';
+});
+
+// Function to handle view toggling between the intro page and the card flip page
+function toggleViews() {
   let introPage = document.getElementById('intro-page');
   let cardFlip = document.getElementById('card-flip');
 
   if (introPage.style.display === 'none') {
       introPage.style.display = 'block';
       cardFlip.style.display = 'none';
-      onFlipCardsPage = false; // Set to false when returning to intro page
   } else {
       introPage.style.display = 'none';
       cardFlip.style.display = 'block';
-      onFlipCardsPage = true; // Set to true when moving to card flip page
+      currentRecipeIndex = getNextRandomRecipeIndex();
+      displayRecipe(currentRecipeIndex);
   }
-});
-
-
-document.getElementById('go-back').addEventListener('click', function() {
-  document.getElementById('intro-page').style.display = 'flex';
-  document.getElementById('card-flip').style.display = 'none';
-  onFlipCardsPage = false; // Update onFlipCardsPage when using the go back arrow
-});
-
-document.addEventListener('keydown', function(event) {
-  if (event.code === 'Enter') {
-      if (!onFlipCardsPage) {
-          document.getElementById('intro-page').style.display = 'none';
-          document.getElementById('card-flip').style.display = 'block';
-          currentRecipeIndex = getNextRandomRecipeIndex();
-          displayRecipe(currentRecipeIndex);
-          onFlipCardsPage = true;
-      } else {
-          currentRecipeIndex = getNextRandomRecipeIndex();
-          displayRecipe(currentRecipeIndex);
-      }
-  } else if (event.code === 'Space' && onFlipCardsPage) {
-      const cardInner = document.querySelector('.card-inner');
-      flipCard(cardInner);
-  } else if (event.code === 'ArrowLeft' && onFlipCardsPage) {
-      // Simulate a click on the "Go Back" button when the left arrow key is pressed
-      document.getElementById('go-back').click();
-  } else if (event.code === 'ArrowRight' && !onFlipCardsPage) {
-      document.getElementById('continue-button').click();
-  }
-});
-
-
-document.addEventListener('touchstart', handleTouchStart, false);        
-document.addEventListener('touchmove', handleTouchMove, false);
-
-let xDown = null;                                                        
-
-function handleTouchStart(evt) {
-    const firstTouch = evt.touches[0];                                      
-    xDown = firstTouch.clientX;                                      
-}                                            
-
-function handleTouchMove(evt) {
-    if (!xDown) {
-        return;
-    }
-
-    let xUp = evt.touches[0].clientX;                                    
-    let xDiff = xDown - xUp;
-
-    if ( xDiff > 0 ) {
-        // Left swipe 
-        currentRecipeIndex = getNextRandomRecipeIndex();
-        displayRecipe(currentRecipeIndex);
-    }                       
-
-    // Reset values
-    xDown = null;                                             
 }
 
+let touchstartX = 0;
+let touchendX = 0;
 
-// Initialize with the first recipe
+function handleTouchStart(evt) {
+    touchstartX = evt.touches[0].clientX;
+}
+
+function handleTouchMove(evt) {
+    touchendX = evt.touches[0].clientX;
+}
+
+function handleTouchEnd(evt) {
+    if (touchstartX - touchendX > 50) {
+        // Swipe left
+        displayRandomRecipe();  // Load a new random recipe
+    } else if (touchendX - touchstartX > 50) {
+        // Swipe right
+        displayPreviousRecipe();  // Show the previous recipe
+    }
+}
+
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+document.addEventListener('touchend', handleTouchEnd, false);
+
+document.querySelector('.card-container').addEventListener('click', function() {
+  flipCard();
+});
+
+
 window.onload = () => {
-  currentRecipeIndex = getNextRandomRecipeIndex();
-  displayRecipe(currentRecipeIndex);
+    createRecipeMenu();
+    currentRecipeIndex = getNextRandomRecipeIndex();
+    displayRecipe(currentRecipeIndex);
 };
+

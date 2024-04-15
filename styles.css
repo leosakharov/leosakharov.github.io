@@ -4,36 +4,58 @@
 }
 
 body {
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 500px 1fr; /* Example: middle column set to 500px */
+    grid-template-rows: auto;
     justify-content: center;
+    align-items: center;
     min-height: 100vh;
     margin: 0;
     background-color: #FFFFFF;
     color: black;
     font-family: 'MPLUSRounded1c', Arial, sans-serif;
+    overflow: hidden;
+    position: relative; /* Ensure that fixed positioning is relative to this if needed */
 }
 
-#intro-page { 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        grid-template-columns: 5px auto 5px; /* Adjusts to have minimal side margins and fill screen */
+        justify-content: stretch; /* Stretches the middle column to fill the space */
+    }
+
+    #intro-page, #card-flip {
+        grid-column: 2; /* Keeps it in the middle column, now adjusted to be almost full width */
+        width: calc(100% - 10px); /* Subtracts margin from the full width */
+    }
+
+    .card-container {
+        width: 100%; /* Ensures the card container fills the adjusted column width */
+    }
+}
+
+#intro-page, #card-flip {
+    grid-column: 2; /* Ensure they are placed in the middle column */
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    margin: 5cm; /* Adds a margin of 5cm on all sides */
+    width: 100%; /* This will take the full width of the grid column */
+}
+
+.header button {
+    text-align: center;
 }
 
 #intro-page h1 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
 #intro-page video {
-    width: 50%;
-    max-width: 640px;
+    width: 100%;  /* Adjusts video to take the full width of the container */
     height: auto;
     border-radius: 10px;
-    margin-bottom: 50px; /* Adjust based on your need */
 }
 
 #continue-button {
@@ -83,8 +105,8 @@ body {
 }
 
 .card-container {
-    width: 500px;
-    height: 700px;
+    width: 100%;  /* Ensures the card container fills the space */
+    height: 700px;  /* Adjusts height as needed */
 }
 
 .card-inner {
@@ -145,4 +167,54 @@ body {
     text-align: center; /* Specifically ensure center alignment for h2 */
     width: 100%; /* Ensures the h2 element takes full width */
     padding-bottom: 10px;
+}
+
+#menu-button {
+    font-size: 20px;             /* Large size for easy readability and clickability */
+    margin-bottom: 10px;
+    cursor: pointer;             /* Indicates that the element is clickable */
+    border: none;                /* No border for a cleaner look */
+    border-radius: 10px;         /* Rounded corners for a modern appearance */
+    background-color: #F3F4F5;
+    color: #0E2332;
+    padding: 10px 20px;          /* Top and bottom padding of 10px, left and right padding of 20px */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    font-family: 'MPLUSRounded1c';
+}
+
+#menu-button:hover {
+    background-color: #E6E9EA;
+}
+
+.recipe-menu {
+    width: 100%; /* Makes the recipe menu take up the full width of its container */
+    display: none; /* Initially hidden */
+    width: calc(100% - 40px); /* Adjust width as necessary */
+    max-width: 360px; /* Maximum width to maintain design consistency */
+    height: 300px; /* Or 'max-height' depending on your design preference */
+    position: absolute;
+    background-color: white; /* Background color for visibility */
+    border-radius: 10px; /* Rounded bottom corners for aesthetics */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Adds depth */
+    z-index: 101; /* Ensures it's above other content */
+    overflow-y: auto; /* Allows vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    padding: 10px 20px; /* Padding for aesthetics, adjust as needed */
+    font-family: 'MPLUSRounded1c';
+}
+
+.recipe-menu button {
+    width: 100%; /* Full width to align text */
+    text-align: left; /* Aligns text to the left */
+    padding: 8px 10px; /* Padding for better touch interaction */
+    margin: 2px 0; /* Spacing between buttons */
+    background-color: #f8f8f8; /* Slightly off-white background for buttons */
+    border: none; /* No border for a cleaner look */
+    border-radius: 5px; /* Slightly rounded corners for buttons */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    cursor: pointer; /* Cursor to indicate button functionality */
+}
+
+.recipe-menu button:hover {
+    background-color: #f5f5f5;
 }
