@@ -18,23 +18,6 @@ body {
     position: relative; /* Ensure that fixed positioning is relative to this if needed */
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    body {
-        grid-template-columns: 5px auto 5px; /* Adjusts to have minimal side margins and fill screen */
-        justify-content: stretch; /* Stretches the middle column to fill the space */
-    }
-
-    #intro-page, #card-flip {
-        grid-column: 2; /* Keeps it in the middle column, now adjusted to be almost full width */
-        width: calc(100% - 10px); /* Subtracts margin from the full width */
-    }
-
-    .card-container {
-        width: 100%; /* Ensures the card container fills the adjusted column width */
-    }
-}
-
 #intro-page, #card-flip {
     grid-column: 2; /* Ensure they are placed in the middle column */
     display: flex;
@@ -187,7 +170,6 @@ body {
 }
 
 .recipe-menu {
-    width: 100%; /* Makes the recipe menu take up the full width of its container */
     display: none; /* Initially hidden */
     width: calc(100% - 40px); /* Adjust width as necessary */
     max-width: 360px; /* Maximum width to maintain design consistency */
