@@ -333,35 +333,44 @@ function toggleViews() {
   }
 }
 
+let touchstartTime;
 let touchstartX = 0;
 let touchendX = 0;
+const touchthreshold = 10; // threshold to distinguish between swipe and tap
 
 function handleTouchStart(evt) {
     touchstartX = evt.touches[0].clientX;
+    touchstartTime = new Date().getTime(); // record time when touch starts
+}
+
+function handleTouchEnd(evt) {
+    const touchendTime = new Date().getTime();
+    const touchDuration = touchendTime - touchstartTime;
+    const touchDeltaX = touchendX - touchstartX;
+
+    // Check if touch is a tap based on time and distance
+    if (touchDuration < 500 && Math.abs(touchDeltaX) < touchthreshold) {
+        // It's a tap, flip the card
+        flipCard();
+    } else {
+        // It's a swipe, determine direction
+        if (touchDeltaX > 50) {
+            // Swipe right
+            displayPreviousRecipe();
+        } else if (touchDeltaX < -50) {
+            // Swipe left
+            displayRandomRecipe();
+        }
+    }
 }
 
 function handleTouchMove(evt) {
     touchendX = evt.touches[0].clientX;
 }
 
-function handleTouchEnd(evt) {
-    if (touchstartX - touchendX > 50) {
-        // Swipe left
-        displayRandomRecipe();  // Load a new random recipe
-    } else if (touchendX - touchstartX > 50) {
-        // Swipe right
-        displayPreviousRecipe();  // Show the previous recipe
-    }
-}
-
 document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchmove', handleTouchMove, false);
 document.addEventListener('touchend', handleTouchEnd, false);
-
-document.querySelector('.card-container').addEventListener('click', function() {
-  flipCard();
-});
-
 
 window.onload = () => {
     createRecipeMenu();
