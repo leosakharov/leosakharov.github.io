@@ -196,22 +196,6 @@ body {
     font-family: 'MPLUSRounded1c';
 }
 
-.popular-menu {
-    display: none; /* Initially hidden */
-    width: calc(100% - 40px); /* Adjust width as necessary */
-    max-width: 360px; /* Maximum width to maintain design consistency */
-    height: 300px; /* Or 'max-height' depending on your design preference */
-    position: absolute;
-    background-color: white; /* Background color for visibility */
-    border-radius: 10px; /* Rounded bottom corners for aesthetics */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Adds depth */
-    z-index: 101; /* Ensures it's above other content */
-    overflow-y: auto; /* Allows vertical scrolling */
-    overflow-x: hidden; /* Prevents horizontal scrolling */
-    padding: 10px 20px; /* Padding for aesthetics, adjust as needed */
-    font-family: 'MPLUSRounded1c';
-}
-
 .recipe-menu button,
 .popular-menu button {
     width: 100%; /* Full width to align text */

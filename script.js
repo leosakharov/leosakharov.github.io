@@ -351,52 +351,72 @@ function toggleViews() {
   }
 }
 
-let touchstartTime;
-let touchstartX = 0;
-let touchendX = 0;
-const touchthreshold = 10; // threshold to distinguish between swipe and tap
-function handleTouchStart(evt) {
-  touchstartX = evt.touches[0].clientX;
-  touchstartTime = new Date().getTime();
+function setupTouchEvents() {
+  let startX = 0;
+  let startTime = 0;
+
+  document.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startTime = new Date().getTime();
+  }, false);
+
+  document.addEventListener('touchmove', function(e) {
+      e.preventDefault();  // This might be needed to prevent scrolling
+  }, false);
+
+  document.addEventListener('touchend', function(e) {
+      let endX = e.changedTouches[0].clientX;
+      let endTime = new Date().getTime();
+      handleSwipe(startX, endX, startTime, endTime);
+  }, false);
 }
 
-function handleTouchEnd(evt) {
-  const touchendTime = new Date().getTime();
-  const touchDuration = touchendTime - touchstartTime;
-  const touchDeltaX = touchendX - touchstartX;
-
-  if (touchDuration < 500 && Math.abs(touchDeltaX) < touchthreshold) {
-      flipCard();
-  } else {
-      if (touchDeltaX < -50) { // Right to left swipe
-          displayRandomRecipe();
+function handleSwipe(startX, endX, startTime, endTime) {
+  let deltaX = endX - startX;
+  let deltaTime = endTime - startTime;
+  if (deltaTime < 500) {  // Ensure a quick swipe
+      if (Math.abs(deltaX) > 50) {
+          if (deltaX < 0) {
+              // Left swipe
+              displayRandomRecipe();
+          }
       }
   }
 }
 
-function handleTouchMove(evt) {
-  touchendX = evt.touches[0].clientX;
+setupTouchEvents();
+
+if (typeof DeviceMotionEvent.requestPermission === 'function') {
+  // Handle iOS 13+ devices
+  DeviceMotionEvent.requestPermission()
+      .then(response => {
+          if (response == 'granted') {
+              window.addEventListener('devicemotion', handleDeviceMotion);
+          }
+      })
+      .catch(console.error);
+} else {
+  // Non-iOS 13+ devices
+  window.addEventListener('devicemotion', handleDeviceMotion);
 }
 
-
-document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchmove', handleTouchMove, false);
-document.addEventListener('touchend', handleTouchEnd, false);
-
-window.onload = () => {
-    createRecipeMenu();
-    currentRecipeIndex = getNextRandomRecipeIndex();
-    displayRecipe(currentRecipeIndex);
-};
-window.addEventListener('devicemotion', function(event) {
+function handleDeviceMotion(event) {
   let threshold = 15;
   let x = event.accelerationIncludingGravity.x;
   let y = event.accelerationIncludingGravity.y;
   let z = event.accelerationIncludingGravity.z;
 
   if (Math.abs(x) > threshold || Math.abs(y) > threshold || Math.abs(z) > threshold) {
-    displayRandomRecipe();
+      displayRandomRecipe();
   }
-});
+}
+
+
+window.onload = () => {
+    createRecipeMenu();
+    currentRecipeIndex = getNextRandomRecipeIndex();
+    displayRecipe(currentRecipeIndex);
+};
+
 
 
