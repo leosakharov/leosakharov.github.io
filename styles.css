@@ -77,7 +77,7 @@ body {
     border-style: solid;
     border-width: 2px;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: normal;
     padding: 10px;
     text-align: center;
@@ -85,6 +85,7 @@ body {
     border: none;  /* Remove border */
     outline: none; /* Remove outline */
     margin-bottom: 5px;;
+    margin-top: 10px;
 }
 
 .card-container {
@@ -152,7 +153,16 @@ body {
     padding-bottom: 10px;
 }
 
-#menu-button {
+
+.menu-containers {
+    display: flex; /* Establishes this container as a flex container */
+    justify-content: space-between; /* Places space between the flex items */
+    align-items: center; /* Aligns items vertically at the center */
+}
+
+
+#menu-button,
+#popular-button {
     font-size: 20px;             /* Large size for easy readability and clickability */
     margin-bottom: 10px;
     cursor: pointer;             /* Indicates that the element is clickable */
@@ -165,7 +175,8 @@ body {
     font-family: 'MPLUSRounded1c';
 }
 
-#menu-button:hover {
+#menu-button:hover,
+#popular-button:hover {
     background-color: #E6E9EA;
 }
 
@@ -185,7 +196,24 @@ body {
     font-family: 'MPLUSRounded1c';
 }
 
-.recipe-menu button {
+.popular-menu {
+    display: none; /* Initially hidden */
+    width: calc(100% - 40px); /* Adjust width as necessary */
+    max-width: 360px; /* Maximum width to maintain design consistency */
+    height: 300px; /* Or 'max-height' depending on your design preference */
+    position: absolute;
+    background-color: white; /* Background color for visibility */
+    border-radius: 10px; /* Rounded bottom corners for aesthetics */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Adds depth */
+    z-index: 101; /* Ensures it's above other content */
+    overflow-y: auto; /* Allows vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    padding: 10px 20px; /* Padding for aesthetics, adjust as needed */
+    font-family: 'MPLUSRounded1c';
+}
+
+.recipe-menu button,
+.popular-menu button {
     width: 100%; /* Full width to align text */
     text-align: left; /* Aligns text to the left */
     padding: 8px 10px; /* Padding for better touch interaction */
@@ -197,6 +225,7 @@ body {
     cursor: pointer; /* Cursor to indicate button functionality */
 }
 
-.recipe-menu button:hover {
+.recipe-menu button:hover,
+.popular-menu button:hover {
     background-color: #f5f5f5;
 }

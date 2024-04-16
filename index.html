@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="./styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 <body>
     <div id="intro-page">
@@ -13,12 +14,13 @@
         <button id="continue-button">Start &rarr;</button>
     </div>
     <div id="card-flip" style="display: none;">
-            <div class="menu-container">
-                <button id="menu-button">All recipes</button>  <!-- Hamburger Icon -->
-                <div id="recipe-menu" class="recipe-menu" style="display: none;"> <!-- Menu Container -->
-                    <!-- Recipe buttons will be appended here -->
-                </div>
-            </div>
+        <div class="menu-containers">
+            <button id="menu-button">All recipes</button>  <!-- Hamburger Icon -->
+        </div>
+        <div class="recipes">
+            <div id="recipe-menu" class="recipe-menu" style="display: none;"></div>
+            <div id="popular-menu" class="popular-menu" style="display: none;"></div> <!-- Container for popular recipes -->
+        </div>
         <div id="card-container" class="card-container"></div>
         <button id="go-back">&larr; Back</button>
     </div>

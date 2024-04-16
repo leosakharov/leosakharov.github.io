@@ -1,10 +1,11 @@
 
 const recipes = [
   { 
-    name: "Aperol/Campari Spritz", 
+    name: "Aperol Spritz", 
     recipe: "5cl Aperol or Campari. 6cl Cava, Soda water",
     garnish: "1 Slice of orange",
-    procedure: "Fill the glass with ice and a single slice of orange. Add Aperol then Proseco Cava. Top off with soda. Stir with short straw and serve."
+    procedure: "Fill the glass with ice and a single slice of orange. Add Aperol then Proseco Cava. Top off with soda. Stir with short straw and serve.",
+    isPopular: true
   },
   { 
     name: "Amaretto Sour", 
@@ -52,7 +53,8 @@ const recipes = [
     name: "Cosmopolitan", 
     recipe: "2cl Lime juice. 6cl Cranberry juice. 4cl Vodka. 2cl Cointreau. 1cl Simple syrup",
     garnish: "Thin cylinder of lime or dry lime",
-    procedure: "Add ingredients into the shaker. Shake and pour the mix into a Martini glass. Garnish with a thin cylinder of dry lime and serve."
+    procedure: "Add ingredients into the shaker. Shake and pour the mix into a Martini glass. Garnish with a thin cylinder of dry lime and serve.",
+    isPopular: true
   },
   { 
     name: "Cuba Libre", 
@@ -61,10 +63,11 @@ const recipes = [
     procedure: "Squeeze quarter of lime in the glass. Fill the glass with ice. Add rum and coke. Garnish with a lime wedge and serve."
   },
   { 
-    name: "Dark&rsquo;n&rsquo;Stormy", 
+    name: "Dark and stormy", 
     recipe: "&frac14; lime juice. Ginger Beer. 4 cl Dark Rum (Gosling). 2 Dashes of Angostura",
     garnish: "",
-    procedure: "Squeeze quarter lime in the glass. Fill with ice. Pour ginger beer till “two fingers” from the top. Add Rum and 2 dashes of angostura. Serve"
+    procedure: "Squeeze quarter lime in the glass. Fill with ice. Pour ginger beer till “two fingers” from the top. Add Rum and 2 dashes of angostura. Serve",
+    isPopular: true
   },
   { 
     name: "Dry Martini", 
@@ -76,13 +79,15 @@ const recipes = [
     name: "Espresso Martini", 
     recipe: "1 Shot of Espresso (3cl). 4cl Vodka. 2cl Kahlua. 0,5cl Cointreau. 1cl Simple Syrup",
     garnish: "3 Coffee beans",
-    procedure: "Add ingredients in a shaker and shake well. Strain the foamy mix into the glass. Garnish with 3 Coffee Beans and serve"
+    procedure: "Add ingredients in a shaker and shake well. Strain the foamy mix into the glass. Garnish with 3 Coffee Beans and serve",
+    isPopular: true
   },
   { 
     name: "Gin Basil", 
     recipe: "Basil. 1 Spoon of sugar. &frac14; Lime. 4cl Gin. 2cl Lemon juice. 1cl Lime syrup. 1cl Simple syrup",
     garnish: "1 Leaf of basil",
-    procedure: "Muddle basil, sugar and lime juice in a shaker. Add ingredients and shake well. Double strain the mix. Add a leaf of Basil and serve"
+    procedure: "Muddle basil, sugar and lime juice in a shaker. Add ingredients and shake well. Double strain the mix. Add a leaf of Basil and serve",
+    isPopular: true
   },
   { 
     name: "Gin Sour", 
@@ -100,7 +105,8 @@ const recipes = [
     name: "Manhattan", 
     recipe: "4cl Bourbon. 2cl Martini Rosso. 2 Drops of Orange Bitters",
     garnish: "Amarena Cherry",
-    procedure: "Add the ingredients into a mixing glass with ice and stir well. Squeeze and orange peel into the Martini glass rim. Pour the mix into the glass. Garnish with Amarena Cherry on long toothpick"
+    procedure: "Add the ingredients into a mixing glass with ice and stir well. Squeeze and orange peel into the Martini glass rim. Pour the mix into the glass. Garnish with Amarena Cherry on long toothpick",
+    isPopular: true
   },
   { 
     name: "Margarita", 
@@ -130,13 +136,15 @@ const recipes = [
     name: "Mojito", 
     recipe: "6 Lime cubes. 2 Spoons of brown sugar. 8 Leaves of mint. 4cl Havana 3Y. 1cl Lime syrup. Soda",
     garnish: "Mint top. 1 Lime cube. 2 Sprays of Angostura",
-    procedure: "Hard muddle 4 wedges of lime with 2 spoons of sugar in Mojito glass. Add 8 leaves of mint and muddle lightly. Fill half the glass with ice. Pour Rum and lime syrup and stir using napkins to cover glass top. Add dash of soda. Garnish with lime, mint-top and Angostura. Serve"
+    procedure: "Hard muddle 4 wedges of lime with 2 spoons of sugar in Mojito glass. Add 8 leaves of mint and muddle lightly. Fill half the glass with ice. Pour Rum and lime syrup and stir using napkins to cover glass top. Add dash of soda. Garnish with lime, mint-top and Angostura. Serve",
+    isPopular: true
   },
   { 
     name: "Moscow Mule", 
     recipe: "2 Pieces of ginger. Half a spoon of brown sugar. &frac14; Lime juice. 4cl Vodka. 2cl Lemon juice. 1cl Lime syrup. 1cl Simple syrup. 5 Dashes of Angostura. Ginger beer",
     garnish: "Slice of cucumber. 2 Dashes of Angostura",
-    procedure: "Muddle ginger and sugar in the shaker. Add ingredients into the shaker. Mix well. Pour the mix into a cocktail glass half of ice. Add GingerBeer. Garnish with cucumber slice and Serve"
+    procedure: "Muddle ginger and sugar in the shaker. Add ingredients into the shaker. Mix well. Pour the mix into a cocktail glass half of ice. Add GingerBeer. Garnish with cucumber slice and Serve",
+    isPopular: true
   },
   { 
     name: "Mezcal Paloma", 
@@ -148,19 +156,22 @@ const recipes = [
     name: "Negroni", 
     recipe: "3cl Gin. 3cl Martini Rosso. 3cl Campari. 2 Dashes of Angostura orange",
     garnish: "1 Slice of dry orange or peel",
-    procedure: "Stir all ingredients in a mixing glass full of ice. Pour the ingredients into a cocktail glass with a big ice-cube. Garnish with orange slice and serve"
+    procedure: "Stir all ingredients in a mixing glass full of ice. Pour the ingredients into a cocktail glass with a big ice-cube. Garnish with orange slice and serve",
+    isPopular: true
   },
   { 
     name: "Old Fashioned", 
     recipe: "2 cubes of white sugar. 5 Dashes Angostura. 5cl Rye Whiskey",
     garnish: "Peel of Orange and a Amarena Cherry. NB: Less sugar if made with Bourbon",
-    procedure: "Muddle sugar with dash of sparkling water and angostura in an old fashioned glass. Add a big ice cube and pour the whiskey. Stir until sugar dissolves totally. Peel orange skin and squeeze into the glass rim. Garnish with the orange peel and a Maraschino cherry. Serve"
+    procedure: "Muddle sugar with dash of sparkling water and angostura in an old fashioned glass. Add a big ice cube and pour the whiskey. Stir until sugar dissolves totally. Peel orange skin and squeeze into the glass rim. Garnish with the orange peel and a Maraschino cherry. Serve",
+    isPopular: true
   },
   { 
     name: "Pisco Sour", 
     recipe: "2cl Lime juice. 4cl Pisco. 1,5cl Egg white. 1cl Simple syrup. 0,5 Cointreau",
     garnish: "3 drops of Angostura. Dry lime",
-    procedure: "Add ingredients into the shaker and shake well. Pour the foamy mix into a sour glass. Spray the foamy top with Angostura. Serve"
+    procedure: "Add ingredients into the shaker and shake well. Pour the foamy mix into a sour glass. Spray the foamy top with Angostura. Serve",
+    isPopular: true
   },
   { 
     name: "Rum Sour", 
@@ -196,13 +207,15 @@ const recipes = [
     name: "Whiskey Sour", 
     recipe: "4cl Bourbon. 2cl Lemon juice. 1,5cl Egg white. 1cl Simple syrup. 2 Dashes of Angostura",
     garnish: "Dry fruit & 1 Amarena Cherry",
-    procedure: "Add all the ingredients into a shaker and shake. Pour the foamy mix into a sour glass. Garnish with Dry fruit &1 Amarena Cherry and serve."
+    procedure: "Add all the ingredients into a shaker and shake. Pour the foamy mix into a sour glass. Garnish with Dry fruit &1 Amarena Cherry and serve.",
+    isPopular: true
   },
   { 
     name: "White Russian", 
     recipe: "3cl Kahlua. 4cl Vodka. 4cl Milk",
     garnish: "3 Coffee Beans",
-    procedure: "Pour Kahlua into a glass full of ice. Add Vodka and Milk into a shaker and shake well. Pour the mix slowly into the glass of Kahlua and ice so it creates two layers. Garnish with 3 coffee beans and serve."
+    procedure: "Pour Kahlua into a glass full of ice. Add Vodka and Milk into a shaker and shake well. Pour the mix slowly into the glass of Kahlua and ice so it creates two layers. Garnish with 3 coffee beans and serve.",
+    isPopular: true
   },
   { 
     name: "Christmas time Glogg", 
@@ -228,6 +241,7 @@ document.getElementById('menu-button').addEventListener('click', function() {
       menu.style.display = 'none';
   }
 });
+
 
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Space' || event.code === 'Space') {
@@ -263,11 +277,15 @@ function displayRecipe(index) {
   const garnish = recipe.garnish.split('.').map(garnish => `<li>${garnish}</li>`).join('');
   const procedureSteps = recipe.procedure.split('.').map(step => step.trim()).filter(step => step).map(step => `<li>${step}.</li>`).join('');
 
+  // Create a friendly file name for the image based on the recipe name
+  const imageName = recipe.name + '.jpg';
+
   const cardContainer = document.getElementById('card-container');
   cardContainer.innerHTML = `
       <div class="card-inner" onclick="flipCard()">
           <div class="card-front">
               <h2>${recipe.name}</h2>
+              <img src="./images/${imageName}" alt="${recipe.name}" style="height: 300px; width: 300px; max-width: 100%; height: auto; display: block; margin: 10px auto; border-radius: 10px;">
           </div>
           <div class="card-back">
               <h2>${recipe.name}</h2>
@@ -337,36 +355,29 @@ let touchstartTime;
 let touchstartX = 0;
 let touchendX = 0;
 const touchthreshold = 10; // threshold to distinguish between swipe and tap
-
 function handleTouchStart(evt) {
-    touchstartX = evt.touches[0].clientX;
-    touchstartTime = new Date().getTime(); // record time when touch starts
+  touchstartX = evt.touches[0].clientX;
+  touchstartTime = new Date().getTime();
 }
 
 function handleTouchEnd(evt) {
-    const touchendTime = new Date().getTime();
-    const touchDuration = touchendTime - touchstartTime;
-    const touchDeltaX = touchendX - touchstartX;
+  const touchendTime = new Date().getTime();
+  const touchDuration = touchendTime - touchstartTime;
+  const touchDeltaX = touchendX - touchstartX;
 
-    // Check if touch is a tap based on time and distance
-    if (touchDuration < 500 && Math.abs(touchDeltaX) < touchthreshold) {
-        // It's a tap, flip the card
-        flipCard();
-    } else {
-        // It's a swipe, determine direction
-        if (touchDeltaX > 50) {
-            // Swipe right
-            displayPreviousRecipe();
-        } else if (touchDeltaX < -50) {
-            // Swipe left
-            displayRandomRecipe();
-        }
-    }
+  if (touchDuration < 500 && Math.abs(touchDeltaX) < touchthreshold) {
+      flipCard();
+  } else {
+      if (touchDeltaX < -50) { // Right to left swipe
+          displayRandomRecipe();
+      }
+  }
 }
 
 function handleTouchMove(evt) {
-    touchendX = evt.touches[0].clientX;
+  touchendX = evt.touches[0].clientX;
 }
+
 
 document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchmove', handleTouchMove, false);
@@ -377,4 +388,15 @@ window.onload = () => {
     currentRecipeIndex = getNextRandomRecipeIndex();
     displayRecipe(currentRecipeIndex);
 };
+window.addEventListener('devicemotion', function(event) {
+  let threshold = 15;
+  let x = event.accelerationIncludingGravity.x;
+  let y = event.accelerationIncludingGravity.y;
+  let z = event.accelerationIncludingGravity.z;
+
+  if (Math.abs(x) > threshold || Math.abs(y) > threshold || Math.abs(z) > threshold) {
+    displayRandomRecipe();
+  }
+});
+
 
