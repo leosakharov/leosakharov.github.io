@@ -285,7 +285,7 @@ function displayRecipe(index) {
       <div class="card-inner" onclick="flipCard()">
           <div class="card-front">
               <h2>${recipe.name}</h2>
-              <img src="./images/${imageName}" alt="${recipe.name}" style="height: 300px; width: 300px; max-width: 100%; height: auto; display: block; margin: 10px auto; border-radius: 10px;">
+              <img src="./${imageName}" alt="${recipe.name}" style="height: 300px; width: 300px; max-width: 100%; height: auto; display: block; margin: 10px auto; border-radius: 10px;">
           </div>
           <div class="card-back">
               <h2>${recipe.name}</h2>
