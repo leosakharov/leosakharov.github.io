@@ -1,22 +1,3 @@
-@font-face {
-    font-family: 'MPLUSRounded1c';
-    src: url('./MPLUSRounded1c-Regular.ttf') format('truetype');
-}
-
-body {
-    display: grid;
-    grid-template-columns: 1fr 500px 1fr; /* Example: middle column set to 500px */
-    grid-template-rows: auto;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #FFFFFF;
-    color: black;
-    font-family: 'MPLUSRounded1c', Arial, sans-serif;
-    overflow: hidden;
-    position: relative; /* Ensure that fixed positioning is relative to this if needed */
-}
 
 #intro-page, #card-flip {
     grid-column: 2; /* Ensure they are placed in the middle column */
@@ -32,13 +13,14 @@ body {
 
 #intro-page h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 #intro-page video {
     width: 100%;  /* Adjusts video to take the full width of the container */
     height: auto;
     border-radius: 10px;
+    margin-top: 100px;
 }
 
 #continue-button {
@@ -52,15 +34,15 @@ body {
     border-style: solid;
     border-width: 2px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: normal;
-    padding: 24px;
+    padding: 15px;
     text-align: center;
     text-transform: none;
     border: none;  /* Remove border */
     outline: none; /* Remove outline */
     margin: 10px auto; /* Centering the button horizontally */
-    margin-top: 200px;
+    margin-top: 50px;
 }
 
 #continue-button:hover {
@@ -71,15 +53,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: #F3F4F5;
     color: #0E2332;
     border-radius: 16px;
     border-style: solid;
     border-width: 2px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 10px;
     letter-spacing: normal;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     text-transform: none;
     border: none;  /* Remove border */
@@ -153,17 +136,15 @@ body {
     padding-bottom: 10px;
 }
 
-
 .menu-containers {
     display: flex; /* Establishes this container as a flex container */
     justify-content: space-between; /* Places space between the flex items */
     align-items: center; /* Aligns items vertically at the center */
 }
 
-
 #menu-button,
 #popular-button {
-    font-size: 20px;             /* Large size for easy readability and clickability */
+    font-size: 14px;             /* Large size for easy readability and clickability */
     margin-bottom: 10px;
     cursor: pointer;             /* Indicates that the element is clickable */
     border: none;                /* No border for a cleaner look */
@@ -199,7 +180,7 @@ body {
     overflow-y: auto; /* Allows vertical scrolling */
     overflow-x: hidden; /* Prevents horizontal scrolling */
     padding: 10px 20px; /* Padding for aesthetics, adjust as needed */
-    font-family: 'MPLUSRounded1c';
+    font-size: x-small;
 }
 
 .recipe-menu button,
@@ -219,10 +200,23 @@ body {
 .popular-menu button:hover {
     background-color: #f5f5f5;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (min-width: 200px) and (max-width: 600px) {
     body {
-        grid-template-columns: 20px 300px 20px; /* Allow the middle content to be more flexible */
-        margin: 0;
+        grid-template-columns: 10px auto 10px; /* Minimal side margins for smaller screens */
+    }
+
+    #card-flip {
+        position: relative; /* Essential for absolute positioning of children */
+        width: 100%; /* Full width */
+    }
+
+    .recipe-menu {
+        position: absolute;
+        width: 80%; /* Adjusted width */
+        left: 50%; /* Move to half of parent width */
+        transform: translateX(-50%); /* Center exactly */
+        top: 25px; /* Align to the top of card-flip or adjust as necessary */
+        padding: 10px; /* Smaller padding */
     }
 
     body h1 {
@@ -242,25 +236,8 @@ body {
 
     .menu-containers {
         flex-direction: column;
-        width: 100%; /* Full width for better control */
         align-items: center; /* Center alignment for child elements */
-    }
 
-    .recipe-menu {
-        display: none; /* Initially hidden */
-        width: 80%; /* Adjust width as necessary */
-        max-width: 360px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        padding: 20px;
-        z-index: 101;
-        overflow: auto;
-    }
-
-    #menu-button, #popular-button {
-        width: 100%; /* Full width to fill parent container */
-        margin-bottom: 10px; /* Provide space between buttons */
     }
 
     .card-front, .card-back {
@@ -270,5 +247,14 @@ body {
 
     .card-back {
         font-size: 0.75em;
+    }
+
+    #continue-button {
+       font-size: 0.8em;
+       padding: em;
+    }
+    
+    #continue-button:hover {
+        background-color: #E6E9EA;
     }
 }
