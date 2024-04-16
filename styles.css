@@ -180,6 +180,12 @@ body {
     background-color: #E6E9EA;
 }
 
+.recipes {
+    display: flex;
+    width: 100%;
+}
+
+
 .recipe-menu {
     display: none; /* Initially hidden */
     width: calc(100% - 40px); /* Adjust width as necessary */
@@ -216,7 +222,12 @@ body {
 @media only screen and (max-width: 500px) {
     body {
         grid-template-columns: 20px 300px 20px; /* Allow the middle content to be more flexible */
-        margin: 20px 5px 20px 5px;
+        margin: 0;
+    }
+
+    body h1 {
+        font-size: 0.9em;
+        margin: 50px auto auto auto;
     }
 
     #intro-page, #card-flip {
@@ -235,6 +246,18 @@ body {
         align-items: center; /* Center alignment for child elements */
     }
 
+    .recipe-menu {
+        display: none; /* Initially hidden */
+        width: 80%; /* Adjust width as necessary */
+        max-width: 360px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        padding: 20px;
+        z-index: 101;
+        overflow: auto;
+    }
+
     #menu-button, #popular-button {
         width: 100%; /* Full width to fill parent container */
         margin-bottom: 10px; /* Provide space between buttons */
@@ -243,5 +266,9 @@ body {
     .card-front, .card-back {
         padding: 10px; /* Reduce padding to fit smaller screens */
         text-align: center; /* Ensure text is centered */
+    }
+
+    .card-back {
+        font-size: 0.75em;
     }
 }
